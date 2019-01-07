@@ -7,6 +7,8 @@ instead of using a MIDI library.
 
 This project is being performed at the Virginia Tech AMP Lab, and the project can be seen [HERE](https://sites.google.com/a/vt.edu/amp_lab/projects/stepper-synth-v2).
 
+**Please use the project page to see the BOM and all information on this project!!!**
+
 Since MIDI uses a specific type of UART, the FPGA will take the serial data and convert it to parallel, as a 3 byte register.
 Once this is done, the message is decoded such that the stepper motors react accordingly. 
 
@@ -34,4 +36,5 @@ This is how the array of floppy drives work on the popular "Floppotron" on YouTu
 
 ## Credits
 The basic UART decoding Verilog code is based off code provided by Electronoobs, modified to be more stable and work with MIDI.
+
 Special Thanks to Robert Perkel and Bob Lineberry for helping with this project and providing assistance with this.

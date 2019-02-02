@@ -60,26 +60,26 @@ O8A, O8B, O8C, O8D);
 		else Invalid <= 1'bx;
 	end
 	
-	always @ (posedge Clk) //for debug use, routes data to LEDs depending on switch configuration
+	always @ (MIDI_in or MIDI_data or Switch) //for debug use, routes data to LEDs depending on switch configuration
 	begin
 		case (Switch)
-			4'b0000: LED <= 8'b00000000;
-			4'b0001: LED <= 8'b11111111;
-			4'b0010: LED <= 8'b00000000;
-			4'b0011: LED <= {7'b0, MIDI_in};
-			4'b0100: LED <= 8'b00000000;
-			4'b0101: LED <= 8'b00000000;
-			4'b0110: LED <= 8'b00000000;
-			4'b0111: LED <= 8'b00000000;
-			4'b1000: LED <= MIDI_data[23:16]; //MIDI byte 1 (Command and Channel)
-			4'b1001: LED <= 8'b00000000;
-			4'b1010: LED <= 8'b00000000;
-			4'b1011: LED <= 8'b00000000;
-			4'b1100: LED <= MIDI_data[15:8]; //MIDI byte 2 (pitch)
-			4'b1101: LED <= 8'b00000000;
-			4'b1110: LED <= MIDI_data[7:0]; //MIDI byte 3 (velocity)
-			4'b1111: LED <= 8'b01010101;
-			default LED <= 8'b00000000;
+			4'b0000: LED = 8'b00000000;
+			4'b0001: LED = 8'b11111111;
+			4'b0010: LED = 8'b00000000;
+			4'b0011: LED = {7'b0, MIDI_in};
+			4'b0100: LED = 8'b00000000;
+			4'b0101: LED = 8'b00000000;
+			4'b0110: LED = 8'b00000000;
+			4'b0111: LED = 8'b00000000;
+			4'b1000: LED = MIDI_data[23:16]; //MIDI byte 1 (Command and Channel)
+			4'b1001: LED = 8'b00000000;
+			4'b1010: LED = 8'b00000000;
+			4'b1011: LED = 8'b00000000;
+			4'b1100: LED = MIDI_data[15:8]; //MIDI byte 2 (pitch)
+			4'b1101: LED = 8'b00000000;
+			4'b1110: LED = MIDI_data[7:0]; //MIDI byte 3 (velocity)
+			4'b1111: LED = 8'b01010101;
+			default LED = 8'b00000000;
 		endcase
 	end
 	

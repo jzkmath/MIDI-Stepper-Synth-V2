@@ -32,7 +32,7 @@ how many steppers turn. The higher the velocity, the more stepper motors turn on
 This is how the array of floppy drives work on the popular "Floppotron" on YouTube.
 
 ## Block Diagram
-![Block Diagram](https://sites.google.com/a/vt.edu/amp_lab/projects/stepper-synth-v2/MIDI_Stepper_SynthV2%20Block%20Diagram.png?attredirects=0)
+![Block Diagram](https://sites.google.com/a/vt.edu/amp_lab/projects/stepper-synth-v2/Stepper%20Synth%20Block%20Diagram.jpg?attredirects=0)
 
 ## Credits
 The basic UART decoding Verilog code is based off code provided by Electronoobs, modified to be more stable and work with MIDI.

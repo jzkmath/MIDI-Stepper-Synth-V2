@@ -9,13 +9,19 @@ The clock on the DE0-nano is 50MHz, so the period is 20ns.
 To convert to the number of clock cycles use the following equation:
 count = 1/(frequency*40ns)
 */
-module MIDI_PitchConv(pitchIn, pitchOut);
-	input [7:0] pitchIn;
+module MIDI_PitchConv(dataIn, pitchOut, velOut, Clk);
+	input [15:0] dataIn;
+	input Clk;
 	output reg [23:0] pitchOut; //largest number was 20 bits long, so use a 24 bit register for safety
-
-	always @ (pitchIn)
+	output [7:0] velOut;
+	
+	assign velOut = dataIn[7:0];
+	
+	always @ (dataIn[15:8])
 	begin
-		case (pitchIn)
+		//velOut = dataIn[7:0]; //pass through the velocity
+		
+		case (dataIn[15:8])
 		//MIDI Note Value		Clock			Pitch	Frequency
 			23	: pitchOut = 	806452;	//	B0		31
 			24	: pitchOut = 	757576;	//	C1		33

@@ -1,51 +1,34 @@
-module MIDI_ShiftReg(Clk, Rst_n, Rx, RxData);
+module MIDI_ShiftReg(Clk, Rst_n, Rx, RxData, RxDone, State);
+	input Clk, Rst_n, Rx;
+	output reg [23:0] RxData;
+	output reg RxDone;
+	output State;
 
-/////////////////////////////////////////////////////////////////////////////////////////
-input           Clk             ; // Clock
-input           Rst_n           ; // Reset
-input           Rx              ; // RS232 RX line.
-output reg [23:0]   RxData      ; // Received data
-/////////////////////////////////////////////////////////////////////////////////////////
-wire          	RxDone; // Reception completed. Data is valid.
-wire           tick; // Baud rate clock
-wire 				RxEn;
-wire [6:0]      NBits;
-wire [15:0]    	BaudRate; //328; 162 etc... (Read comment in baud rate generator file)
-wire [7:0] Rx_in; //Rx Data from MIDI_rx
-wire is_receiving, recv_error;
-/////////////////////////////////////////////////////////////////////////////////////////
-assign 		RxEn = 1'b1	;
-assign 		BaudRate = 16'd50; 	//baud rate set to 31250 for MIDI. Why 100? (Read comment in baud rate generator file)
-assign 		NBits = 4'b1000	;	//We receive 8 bits 
-/////////////////////////////////////////////////////////////////////////////////////////
+	wire [7:0] Rx_in; //Rx Data from MIDI_rx
+	wire read_enable;
+	reg [23:0] RxDataBuf;
 
-//byte shift register
-always @ (negedge RxDone)
-begin
-	RxData <= {RxData[15:0], Rx_in};
-end 
+	always @ (posedge Clk)
+	begin
+		RxDone <= read_enable;
+	end
 
+	//byte shift register
+	always @ (negedge read_enable)
+	begin
+		RxDataBuf <= {RxDataBuf[15:0], Rx_in};
+	end 
+	
+	//make sure complete message passes through:
+	// 1NNNCCCC 0PPPPPPP 0VVVVVVV
+	always @ (posedge Clk)
+	begin
+		if ((RxDataBuf[23] == 1'b1) & (RxDataBuf[15] == 1'b0) & (RxDataBuf[7] == 1'b0))
+		begin
+			RxData <= RxDataBuf;
+		end
+	end
 
-//Make connections between Rx module and TOP inputs and outputs and the other modules
-MIDI_rx I_RS232RX(
-    	.Clk(Clk)             	,
-   	.Rst_n(Rst_n)         	,
-    	.RxEn(RxEn)           	,
-    	.RxData(Rx_in)       	,
-    	.read_enable(RxDone)    ,
-    	.Rx(Rx)               	,
-    	.Tick(tick)           	,
-    	.NBits(NBits),
-    );
-
-//Make connections between tick generator module and TOP inputs and outputs and the other modules
-MIDI_BaudRate_generator I_BAUDGEN(
-    	.Clk(Clk)               ,
-    	.Rst_n(Rst_n)           ,
-    	.Tick(tick)             ,
-    	.BaudRate(BaudRate)
-    ); 
-
-
+	MIDI_rx MRX1(Clk, Rst_n, Rx_in, read_enable, Rx, State);	
 
 endmodule

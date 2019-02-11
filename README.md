@@ -66,3 +66,8 @@ Finally, we use the velocity value to determine how many stepper motors get that
 The basic UART decoding Verilog code is based off code provided by Electronoobs, modified to be more stable and work with MIDI.
 
 Special Thanks to Robert Perkel and Bob Lineberry for helping with this project and providing assistance with this.
+
+## Legal
+This project is under the GNU GPL3.0 Open Source License. 
+You are free to use the code in your project, so long as you credit the creator (Jonathan Kayne).
+I want people to be able to use my code, but I don't want people to plagiarize my work!

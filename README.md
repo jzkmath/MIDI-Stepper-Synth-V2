@@ -32,10 +32,10 @@ how many steppers turn. The higher the velocity, the more stepper motors turn on
 This is how the array of floppy drives work on the popular "Floppotron" on YouTube.
 
 ## Block Diagram
-![Block Diagram](https://sites.google.com/a/vt.edu/amp_lab/projects/stepper-synth-v2/Stepper%20Synth%20Block%20Diagram.jpg?attredirects=0)
+![Block Diagram](https://github.com/jzkmath/MIDI-Stepper-Synth-V2/blob/master/SolidWorks/BlockDiagram.png)
 
 ## Principle of Operation
-![FSM](https://sites.google.com/a/vt.edu/amp_lab/projects/stepper-synth-v2/FSM.png?attredirects=0)
+![FSM](https://github.com/jzkmath/MIDI-Stepper-Synth-V2/blob/master/SolidWorks/FSM.png)
 
 The first thing that must be done to convert MIDI into stepper music is that we need to decode the MIDI signal. MIDI uses 31250 baud UART (Universal Asynchronous Recieve Transmit) to send an recieve data. This is a form of serial, so we need to load this into a register to act upon with combinational logic. To do this, we use a Finite State Machine, or FSM with two states; Idle and Read. 
 In the Idle state, the Rx line is high. When a device wants to send a message, the Rx line is dropped low. This is known as the start bit and the actual data is the 8 bits that follow, then the line goes high again (called the stop bit).

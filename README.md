@@ -5,9 +5,9 @@ The key advantage to doing so is that an FPGA can execute commands at the same t
 This also allows for a better understanding of how MIDI actually works, because the MIDI has to be decoded manually
 instead of using a MIDI library.
 
-This project is being performed at the Virginia Tech AMP Lab, and the project can be seen [HERE](https://sites.google.com/a/vt.edu/amp_lab/projects/stepper-synth-v2).
+This project is being performed at the Virginia Tech AMP Lab, and the project can be seen (Link is dead)
 
-Alternatively, you can view the PDF of this Project [HERE](https://drive.google.com/file/d/1lXkzFJX2dU3f6C9u_uYZjJ9Xq0Dem_aX/view?usp=sharing)
+Alternatively, you can view the project documentation/Notes in the "Project Documentation" folder and opening the "Documentation.md" file.
 
 **Please use the project page or PDF to see the BOM and all information on this project!!!**
 
